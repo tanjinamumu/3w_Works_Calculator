@@ -16,31 +16,29 @@ let calculate = (number) => {
         result.value += number;
     }
 }
+let prevLength = 0;
 
 let Result = () => {
     try{
         let outputValue = eval(result.value);
         result.value = outputValue.toLocaleString();
 
-        // adjust font size based on output length
-        if (outputValue.toString().length > 8) {
+        let length = outputValue.toString().length;
+        if (length > 10) {
             result.style.fontSize = "20px";
-        } else if (outputValue.toString().length > 6) {
-            result.style.fontSize = "24px";
-        } else if (outputValue.toString().length > 4) {
-            result.style.fontSize = "30px";
-        } else {
-            result.style.fontSize = "36px";
+        }  
+        else {
+            result.style.fontSize = "40px";
         }
+
+        if(length < prevLength) {
+            result.style.fontSize = getComputedStyle(result).getPropertyValue('font-size');
+        }
+        prevLength = length; 
     }
     catch(err){
         alert("Enter the valid result");
     }
-}
-
-
-function color(){
-    result.value = " ";
 }
 
 function del(){
